@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home</title>
-        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="../images/logoparent.png">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
         <link href="/your-path-to-uicons/css/uicons-[your-style].css" rel="stylesheet">
@@ -63,6 +63,15 @@
                 text-decoration: none;
                 color: #4d4b34;
             }
+            .dropdown-toggle{
+                border: 2px solid brown;
+                display: inline;
+                padding-right: 10px;
+                padding-left: 10px;
+                border-radius: 20px;
+                font-weight: 700;
+                background-color: #c9864f;
+            }
         </style>
     </head>
     <body>
@@ -80,9 +89,19 @@
             </div>
             <hr style="height: 2px">
             <div class="row">
-                <h5 class="categ"><a href="#">Dog food</a></h5>
-                <h5 class="categ"><a href="#">Accessory</a></h5>
-                <h5 class="categ"><a href="#">Shampoo</a></h5>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort by
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         
