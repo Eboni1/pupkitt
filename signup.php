@@ -15,7 +15,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $province = $_POST['province'];
     $zipcode = $_POST['zipcode'];
     $password = $_POST['password'];
-    $terms = $_POST['terms'];
+    $email = $_POST['email'];
+
 }
 ?>
 
@@ -104,6 +105,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <div class="col">
                     <div class="mb-3">
                         <input class="form-control" name="password" type="password" placeholder="Password" aria-label="default input example">
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col">
+                    <div class="mb-3">
+                        <input class="form-control" name="email" type="email" placeholder="Email" aria-label="default input example">
                     </div>
                 </div>
                 <div class="col-2"></div>
