@@ -26,9 +26,10 @@ include("functions.php");
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4 text-center">
+                    <!-- fix login page -->
                     <h1>login to gar</h1>
                 </div>
-                <div class="col-sm-4"></div>
+                <div class="col-sm-4"></div> 
             </div>
         </div>
     </body>

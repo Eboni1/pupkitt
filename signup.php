@@ -15,8 +15,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $province = $_POST['province'];
     $zipcode = $_POST['zipcode'];
     $password = $_POST['password'];
-    $email = $_POST['email'];
+    $email = $_POST['email']; #fix this error, unidentified array key daw
 
+
+    ##Create queries for inserting into database
 }
 ?>
 
