@@ -144,7 +144,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                     <button type="submit" class="btn btn-success">Sign Up</button>
                 </div>
                 <div class="col">
-                    <button href="index.php" class="btn btn-warning">Cancel</button>
+                    <a href="index.php" class="btn btn-warning">Cancel</a>
                 </div>
                 <div class="col-2"></div>
                 

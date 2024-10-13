@@ -2,6 +2,41 @@
 session_start();
 include("connection.php");
 include("functions.php");
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if(!empty($username) && !empty($password)){
+        $query = "SELECT * FROM users WHERE username = '$username' limit 1";
+        $result = mysqli_query($con, $query);
+        $logindata = mysqli_fetch_assoc($result);
+        $type = $logindata['user_type'];
+
+        switch($type){
+            case 'A':
+                if($logindata['password'] === $password){
+                    $_SESSION['num_id'] = $logindata['id'];
+                    $_SESSION['type'] = $type;
+                    header("Location: adminpage/index.php");
+                    die;
+                }
+                break;
+            case 'U':
+                if($logindata['password'] === $password){
+                    $_SESSION['num_id'] = $logindata['id'];
+                    $_SESSION['type'] = $type;
+                    header("Location: userpage/index.php");
+                    die;
+                }
+                break;
+            default:
+            echo '<script>alert("Undefined user type.")</script>';
+        }
+    }else{
+        echo '<script>alert("Please enter valid information.")</script>';    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,15 +57,32 @@ include("functions.php");
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="container mt-5">
+            <form action="" method="post">
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4 text-center">
-                    <!-- fix login page -->
-                    <h1>login to gar</h1>
+                    <label for="">Username</label>
+                    <input type="text" name="username">
                 </div>
                 <div class="col-sm-4"></div> 
             </div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4 text-center">
+                    <label for="">Password</label>
+                    <input type="password" name="password">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            </form>
         </div>
     </body>
 </html>
