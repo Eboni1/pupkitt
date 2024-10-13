@@ -1,9 +1,10 @@
 <?php
 session_start();
-include("connection.php");
-include("functions.php");
+include "connection.php";
+include "functions.php";
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
+    $username = $_POST['username'];
     $firstname = $_POST['firstname'];
     $middlename = $_POST['middlename'];
     $lastname = $_POST['lastname'];
@@ -15,35 +16,36 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $province = $_POST['province'];
     $zipcode = $_POST['zipcode'];
     $password = $_POST['password'];
-    $email = $_POST['email']; #fix this error, unidentified array key daw
+    $email = $_POST['email']; 
+
+    $address = $barangay . ", " . $city . ", " . $province . ", " . $zipcode;
 
 
     ##Create queries for inserting into database
+
+    if(!empty($password) && !empty($firstname) && !empty($phonenum) && !empty($barangay)){
+        $query = "INSERT INTO users
+                  (`username`, `firstname`, `middlename`, `lastname`, `email`, `phonenumber`, `password`, `address`, `birth_date`, `gender`, `user_type`)
+                  VALUES
+                  ('$username', '$firstname', '$middlename', '$lastname', '$email', '$phonenum', '$password', '$address', '$birthdate', '$gender', 'U'";
+        $result = mysqli_query($con, $query);
+    }else{
+        echo '<script>alert("Please fill out the form with the appropriate information")</script>';
+    }
 }
 ?>
 
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pup Kitt | Signup</title>
+    <title>PuppKitt | Signup</title>
     <link rel="icon" type="image/x-icon" href="images/logoparent.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .signup{
-            border: 1px solid black;
-            display: inline;
-            padding-right: 10px;
-            padding-left: 10px;
-            border-radius: 20px;
-            background-color: greenyellow;
-        }
-    </style>
 </head>
 <body>
     <form action="" method="post">
@@ -68,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             <div class="row mb-3">
                 <div class="col-2"></div>
                 <div class="col">
-                    <input type="text" name="birthdate" class="form-control" placeholder="YYYY-MM-DD" aria-label="First name">
+                    <input type="date" name="birthdate" class="form-control" placeholder="YYYY-MM-DD" aria-label="First name">
                 </div>
                 <div class="col">
                     <input type="text" name="phonenumber" class="form-control" placeholder="Phone Number" aria-label="Last name">
@@ -106,6 +108,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <div class="col-2"></div>
                 <div class="col">
                     <div class="mb-3">
+                        <input class="form-control" name="username" type="text" placeholder="Username" aria-label="default input example">
+                    </div>
+                </div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col">
+                    <div class="mb-3">
                         <input class="form-control" name="password" type="password" placeholder="Password" aria-label="default input example">
                     </div>
                 </div>
@@ -115,7 +126,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 <div class="col-2"></div>
                 <div class="col">
                     <div class="mb-3">
-                        <input class="form-control" name="email" type="email" placeholder="Email" aria-label="default input example">
+                        <input class="form-control" name="email" type="text" placeholder="Email" aria-label="default input example">
                     </div>
                 </div>
                 <div class="col-2"></div>

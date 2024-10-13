@@ -3,10 +3,10 @@
 function check_login($con)
 {
 
-	if(isset($_SESSION['num_id']))
+	if(isset($_SESSION['id']))
 	{
 
-		$id = $_SESSION['num_id'];
+		$id = $_SESSION['id'];
 
 		
 				$query = "select * from users where id = '$id' limit 1";
