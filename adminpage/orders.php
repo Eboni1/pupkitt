@@ -96,8 +96,8 @@ include "../functions.php";
                 <nav class="nav">
                     <img src="../images/logoparent.png" class="logo">
                     <ul>
-                        <li><a href="#">DASHBOARD</a></li>
-                        <li><a href="orders.php">ORDERS</a></li>
+                        <li><a href="index.php">DASHBOARD</a></li>
+                        <li><a href="#services">ORDERS</a></li>
                         <li><a href="#services">PRODUCTS</a></li>
                         <a href="#"><img class="profilepic" src="../images/profileimg.jpg" alt="profileimg"></a>
                     </ul>
@@ -122,6 +122,10 @@ include "../functions.php";
                 </ul>
             </div>
         </div>
-        
+        <div class="container">
+            <div class="row">
+                
+            </div>
+        </div>
     </body>
 </html>
