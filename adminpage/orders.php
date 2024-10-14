@@ -3,6 +3,7 @@ session_start();
 include "../connection.php";
 include "../functions.php";
 
+$user_date = check_login($con);
 ?>
 
 <!DOCTYPE html>
