@@ -92,6 +92,7 @@ $user_date = check_login($con);
         </style>
     </head>
     <body>
+        <!-- NAVBAR -->
         <div class="container">
             <div class="row mt-3">
                 <nav class="nav">
@@ -123,9 +124,53 @@ $user_date = check_login($con);
                 </ul>
             </div>
         </div>
-        <div class="container">
+        <!-- MANAGE ORDERS CONTENT -->
+        <div class="container m-3">
             <div class="row">
-                
+                <div class="col-4">
+                    <?php
+                        $ordered_user = "SELECT DISTINCT mo.item_id
+                                                            , u.username
+                                                            , u.address
+                                                            , u.phonenumber
+                                                            , u.email
+                                                        from `orders` mo
+                                                        join `users` u
+                                                        on mo.user_id = u.id
+                                                        where mo.status = 'Pending'";
+                        $order_user = mysqli_query($con, $ordered_user);
+
+                        while($order_info = mysqli_fetch_assoc($order_user)){ 
+                                            
+                            $item_ref = $order_info['item_id'];
+                            $user = $order_info['username'];
+                            $address = $order_info['address'];
+                            $phonenumber = $order_info['phonenumber'];
+                            $email = $order_info['email'];
+                            
+                            echo "<em>".$ord_ref_num."</em> - <a>".$user."</a> <br>" ;
+                            echo "<small>".$address."</small>" ;
+                            $sql_get_ingredient = "SELECT i.item_name
+                                                        , i.item_price
+                                                        , i.item_desc
+                                                    from `orders` mo
+                                                    JOIN `items` i
+                                                    ON mo.item_ordered = i.items_id
+                                                    where mo.ref_id = '$item_ref'";
+                            $ingredient_result = mysqli_query($con,$sql_get_ingredient);
+                            
+                            echo "<ul>";
+                            while($ing = mysqli_fetch_assoc($ingredient_result)){
+                                echo "<li>" . $ing['item_name'] . "(". $ing['item_price'] .")" . "</li>";
+                            }
+                            echo "</ul>";  ?>
+                        <a href="update_order.php?update_order_status=D&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-success btn-sm">Delivered</a>
+                        <a href="update_order.php?update_order_status=X&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-danger btn-sm">Cancel</a> <hr>
+                        <?php } 
+                    ?>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4"></div>
             </div>
         </div>
     </body>
