@@ -3,7 +3,6 @@ session_start();
 include "../connection.php";
 include "../functions.php";
 
-$user_date = check_login($con);
 ?>
 
 <!DOCTYPE html>
@@ -148,15 +147,17 @@ $user_date = check_login($con);
                             $phonenumber = $order_info['phonenumber'];
                             $email = $order_info['email'];
                             
-                            echo "<em>".$ord_ref_num."</em> - <a>".$user."</a> <br>" ;
-                            echo "<small>".$address."</small>" ;
+                            echo "<em>".$item_ref."</em> - <a>".$user."</a> <br>" ;
+                            echo "<small>".$address."</small> <br>" ;
+                            echo "<small>".$phonenumber."</small><br>" ;
+                            echo "<small>".$email."</small>" ;
                             $sql_get_ingredient = "SELECT i.item_name
                                                         , i.item_price
                                                         , i.item_desc
                                                     from `orders` mo
                                                     JOIN `items` i
-                                                    ON mo.item_ordered = i.items_id
-                                                    where mo.ref_id = '$item_ref'";
+                                                    ON mo.item_id = i.items_id
+                                                    where mo.item_id = '$item_ref'";
                             $ingredient_result = mysqli_query($con,$sql_get_ingredient);
                             
                             echo "<ul>";
