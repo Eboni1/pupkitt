@@ -3,6 +3,16 @@ session_start();
 include "../connection.php";
 include "../functions.php";
 
+$ordered_user = "SELECT DISTINCT mo.item_id
+                                , u.username
+                                , u.address
+                                , u.phonenumber
+                                , u.email
+                            from `orders` mo
+                            join `users` u
+                            on mo.user_id = u.id
+                            where mo.status = 'Delivered'";
+$order_user = mysqli_query($con, $ordered_user);
 ?>
 
 <!DOCTYPE html>
@@ -124,54 +134,61 @@ include "../functions.php";
             </div>
         </div>
         <!-- MANAGE ORDERS CONTENT -->
-        <div class="container m-3">
-            <div class="row">
-                <div class="col-4">
+        <div class="container m-5">
+            <div class="row mb-3">
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+            </div>
+            <div class="row mb-3">
+            <?php
+            while($order_info = mysqli_fetch_assoc($order_user)){
+                $item_ref = $order_info['item_id'];
+                $user = $order_info['username'];
+                $address = $order_info['address'];
+                $phonenumber = $order_info['phonenumber'];
+                $email = $order_info['email'];
+            ?>
+                <div class="col">
                     <?php
-                        $ordered_user = "SELECT DISTINCT mo.item_id
-                                                            , u.username
-                                                            , u.address
-                                                            , u.phonenumber
-                                                            , u.email
-                                                        from `orders` mo
-                                                        join `users` u
-                                                        on mo.user_id = u.id
-                                                        where mo.status = 'Pending'";
-                        $order_user = mysqli_query($con, $ordered_user);
-
-                        while($order_info = mysqli_fetch_assoc($order_user)){ 
-                                            
-                            $item_ref = $order_info['item_id'];
-                            $user = $order_info['username'];
-                            $address = $order_info['address'];
-                            $phonenumber = $order_info['phonenumber'];
-                            $email = $order_info['email'];
-                            
                             echo "<em>".$item_ref."</em> - <a>".$user."</a> <br>" ;
-                            echo "<small>".$address."</small> <br>" ;
-                            echo "<small>".$phonenumber."</small><br>" ;
-                            echo "<small>".$email."</small>" ;
-                            $sql_get_ingredient = "SELECT i.item_name
-                                                        , i.item_price
-                                                        , i.item_desc
-                                                    from `orders` mo
-                                                    JOIN `items` i
-                                                    ON mo.item_id = i.items_id
-                                                    where mo.item_id = '$item_ref'";
-                            $ingredient_result = mysqli_query($con,$sql_get_ingredient);
                             
-                            echo "<ul>";
-                            while($ing = mysqli_fetch_assoc($ingredient_result)){
-                                echo "<li>" . $ing['item_name'] . "(". $ing['item_price'] .")" . "</li>";
-                            }
-                            echo "</ul>";  ?>
+                            
+                    ?>
+                </div>
+                <div class="col">
+                    <?php
+                    echo "<small>".$address."</small> " ;
+                    ?>
+                </div>
+                <div class="col">
+                    <?php
+                        echo "<small>".$phonenumber."</small>" ;
+                        echo "<small>".$email."</small>" ;
+                    ?>
+                </div>
+                <div class="col">
+                    <?php
+                        $sql_get_ingredient = "SELECT i.item_name 
+                                                    , i.item_price 
+                                                    , i.item_desc 
+                                                    from `orders` mo 
+                                                    JOIN `items` i 
+                                                    ON mo.item_id = i.item_id 
+                                                    where i.item_id = '$item_ref';";
+                        $ingredient_result = mysqli_query($con,$sql_get_ingredient);
+
+                        echo "<ul>";
+                        while($ing = mysqli_fetch_assoc($ingredient_result)){
+                        echo "<li>" . $ing['item_name'] . "(". $ing['item_price'] .")" . "</li>";
+                        }
+                        echo "</ul>";  ?>
                         <a href="update_order.php?update_order_status=D&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-success btn-sm">Delivered</a>
                         <a href="update_order.php?update_order_status=X&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-danger btn-sm">Cancel</a> <hr>
                         <?php } 
                     ?>
                 </div>
-                <div class="col-4"></div>
-                <div class="col-4"></div>
+
             </div>
         </div>
     </body>
