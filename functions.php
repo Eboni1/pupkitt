@@ -29,3 +29,9 @@ function check_login($con)
 	die;
 
 }
+
+function generateRandom8DigitNumber() {
+    // Generate a random number between 10000000 and 99999999
+    $randomNumber = rand(10000000, 99999999);
+    return $randomNumber;
+}

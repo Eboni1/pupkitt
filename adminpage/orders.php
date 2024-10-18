@@ -4,7 +4,8 @@ include "../connection.php";
 include "../functions.php";
 
 $ordered_user = "SELECT DISTINCT mo.item_id
-                                , u.username
+                                , u.firstname
+                                , u.lastname
                                 , u.address
                                 , u.phonenumber
                                 , u.email
@@ -140,18 +141,20 @@ $order_user = mysqli_query($con, $ordered_user);
                 <div class="col-4"></div>
                 <div class="col-4"></div>
             </div>
-            <div class="row mb-3">
+            
             <?php
             while($order_info = mysqli_fetch_assoc($order_user)){
                 $item_ref = $order_info['item_id'];
-                $user = $order_info['username'];
+                $firstname = $order_info['firstname'];
+                $lastname = $order_info['lastname'];
                 $address = $order_info['address'];
                 $phonenumber = $order_info['phonenumber'];
                 $email = $order_info['email'];
             ?>
+            <div class="row mb-3">
                 <div class="col">
                     <?php
-                            echo "<em>".$item_ref."</em> - <a>".$user."</a> <br>" ;
+                            echo "<em>".$item_ref."</em> - <a>".$firstname."</a> " . $lastname . "<br>" ;
                             
                             
                     ?>
@@ -163,7 +166,7 @@ $order_user = mysqli_query($con, $ordered_user);
                 </div>
                 <div class="col">
                     <?php
-                        echo "<small>".$phonenumber."</small>" ;
+                        echo "<small>".$phonenumber."</small> <br>" ;
                         echo "<small>".$email."</small>" ;
                     ?>
                 </div>
@@ -185,10 +188,10 @@ $order_user = mysqli_query($con, $ordered_user);
                         echo "</ul>";  ?>
                         <a href="update_order.php?update_order_status=D&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-success btn-sm">Delivered</a>
                         <a href="update_order.php?update_order_status=X&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-danger btn-sm">Cancel</a> <hr>
-                        <?php } 
-                    ?>
+                        
                 </div>
-
+                <?php } 
+                    ?>
             </div>
         </div>
     </body>
