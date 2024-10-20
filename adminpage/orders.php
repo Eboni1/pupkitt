@@ -4,6 +4,7 @@ include "../connection.php";
 include "../functions.php";
 
 $ordered_user = "SELECT DISTINCT mo.item_id
+                                , mo.reference_id
                                 , u.firstname
                                 , u.lastname
                                 , u.address
@@ -143,55 +144,63 @@ $order_user = mysqli_query($con, $ordered_user);
             </div>
             
             <?php
-            while($order_info = mysqli_fetch_assoc($order_user)){
-                $item_ref = $order_info['item_id'];
-                $firstname = $order_info['firstname'];
-                $lastname = $order_info['lastname'];
-                $address = $order_info['address'];
-                $phonenumber = $order_info['phonenumber'];
-                $email = $order_info['email'];
+                while($order_info = mysqli_fetch_assoc($order_user)){
+                    $reference_id = $order_info['reference_id'];
+                    $item_ref = $order_info['item_id'];
+                    $firstname = $order_info['firstname'];
+                    $lastname = $order_info['lastname'];
+                    $address = $order_info['address'];
+                    $phonenumber = $order_info['phonenumber'];
+                    $email = $order_info['email'];
             ?>
             <div class="row mb-3">
+                <!-- COLUMN -->
                 <div class="col">
                     <?php
-                            echo "<em>".$item_ref."</em> - <a>".$firstname."</a> " . $lastname . "<br>" ;
-                            
-                            
+                        echo "<small>".$reference_id."</small> " ;
                     ?>
                 </div>
+                <!-- COLUMN -->
+                <div class="col"> 
+                    <?php
+                        echo "<em>".$item_ref."</em> - <a>".$firstname."</a> " . $lastname . "<br>" ;  
+                    ?>
+                </div>
+                <!-- COLUMN -->
                 <div class="col">
                     <?php
-                    echo "<small>".$address."</small> " ;
+                        echo "<small>".$address."</small> " ;
                     ?>
                 </div>
+                <!-- COLUMN -->
                 <div class="col">
                     <?php
                         echo "<small>".$phonenumber."</small> <br>" ;
                         echo "<small>".$email."</small>" ;
                     ?>
                 </div>
+                <!-- COLUMN -->
                 <div class="col">
                     <?php
                         $sql_get_ingredient = "SELECT i.item_name 
                                                     , i.item_price 
                                                     , i.item_desc 
-                                                    from `orders` mo 
-                                                    JOIN `items` i 
-                                                    ON mo.item_id = i.item_id 
-                                                    where i.item_id = '$item_ref';";
+                                                from `orders` mo 
+                                                JOIN `items` i 
+                                                ON mo.item_id = i.item_id 
+                                                where i.item_id = '$item_ref';";
                         $ingredient_result = mysqli_query($con,$sql_get_ingredient);
 
                         echo "<ul>";
                         while($ing = mysqli_fetch_assoc($ingredient_result)){
-                        echo "<li>" . $ing['item_name'] . "(". $ing['item_price'] .")" . "</li>";
+                            echo "<li>" . $ing['item_name'] . "(". $ing['item_price'] .")" . "</li>";
                         }
                         echo "</ul>";  ?>
                         <a href="update_order.php?update_order_status=D&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-success btn-sm">Delivered</a>
                         <a href="update_order.php?update_order_status=X&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-danger btn-sm">Cancel</a> <hr>
                         
                 </div>
-                <?php } 
-                    ?>
+                <?php } ?>
             </div>
         </div>
     </body>

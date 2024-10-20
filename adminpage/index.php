@@ -89,6 +89,17 @@ include "../functions.php";
                 font-weight: 700;
                 background-color: #c9864f;
             }
+            .box{
+                background-color: white;
+                box-shadow: brown;
+                border-radius: .5rem;
+                padding: 2rem;
+                border: solid;
+                overflow-x: hidden;
+            }
+            .image{
+                width: 200px;
+            }
         </style>
     </head>
     <body>
@@ -123,6 +134,33 @@ include "../functions.php";
                 </ul>
             </div>
         </div>
-        
+        <div class="container">
+            <div class="row">
+                <?php
+                    $query = "SELECT * FROM `items`";
+                    $items = mysqli_query($con,$query);
+                    if($items->num_rows > 0){
+                        while($row = $items->fetch_assoc()){
+                            $item_id = $row['item_id'];
+                            
+                            $puery = "SELECT * FROM `items` WHERE item_id = '$item_id'";
+                            $count_review = mysqli_query($con, $puery);
+                            $count = $count_review->num_rows;
+
+                            ?>
+                                <div class="col m-2 box">
+                                    <img src="../images/<?= $row['image']; ?>" alt="" class="image">
+                                    <h3 class="title"><?= $row['item_name']; ?></h3>
+                                    <p class="total-reviews"><i class="fas fa-star"></i> <span><?= $count; ?></span></p>
+                                    <a href="view_post.php?get_id=<?= $post_id; ?>" class="inline-btn">view post</a>
+                                </div>
+                            <?php
+                        }
+                    }else{
+                        echo '<p class="empty">no posts added yet!</p>';
+                    }
+                ?>
+            </div>
+        </div>
     </body>
 </html>
