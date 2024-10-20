@@ -136,6 +136,12 @@ include "../functions.php";
         </div>
         <div class="container">
             <div class="row">
+                <div class="col" style="text-align: center;">   
+                    <h2>Popular Products</h2>
+
+                </div>
+            </div>
+            <div class="row">
                 <?php
                     $query = "SELECT * FROM `items`";
                     $items = mysqli_query($con,$query);
@@ -148,7 +154,7 @@ include "../functions.php";
                             $count = $count_review->num_rows;
 
                             ?>
-                                <div class="col m-2 box">
+                                <div class="col m-2 box" style="align-content: center">
                                     <img src="../images/<?= $row['image']; ?>" alt="" class="image">
                                     <h3 class="title"><?= $row['item_name']; ?></h3>
                                     <p class="total-reviews"><i class="fas fa-star"></i> <span><?= $count; ?></span></p>

@@ -3,18 +3,17 @@ session_start();
 include "../connection.php";
 include "../functions.php";
 
-$ordered_user = "SELECT DISTINCT mo.item_id
-                                , mo.reference_id
-                                , u.firstname
-                                , u.lastname
-                                , u.address
-                                , u.phonenumber
-                                , u.email
-                            from `orders` mo
-                            join `users` u
-                            on mo.user_id = u.id
-                            where mo.status = 'Delivered'";
-$order_user = mysqli_query($con, $ordered_user);
+
+
+ 
+
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +81,7 @@ $order_user = mysqli_query($con, $ordered_user);
                 text-decoration: none;
                 color: #4d4b34;
             }
-            .dropdown-toggle{
+            .sort_ref{
                 border: 2px solid brown;
                 display: inline;
                 padding-right: 10px;
@@ -117,24 +116,50 @@ $order_user = mysqli_query($con, $ordered_user);
                 </nav>
             </div>
             <hr style="height: 2px">
-            <div class="row">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort by
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        <!-- FINISH ADMIN PAGE FUNCTIONS -->
+            <form action="" method="post">
+                <div class="row">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                        <a type="submit" class="nav-link sort_ref" name="delivered" role="button" aria-expanded="false">Delivered</a>
+                        <a type="submit" class="nav-link sort_ref" name="pending" role="button" aria-expanded="false">Pending</a>
+                        <input type="text" placeholder="Search" style="float:right">
+                        </li>
                     </ul>
-                    <input type="text" placeholder="Search" style="float:right">
-                    </li>
-                </ul>
-            </div>
+                </div>
+            </form>
+            
         </div>
+        <?php
+           if(isset($_POST['delivered'])){
+            $orderString = "Delivered";
+            $ordered_user = "SELECT DISTINCT mo.item_id
+                                            , mo.reference_id
+                                            , u.firstname
+                                            , u.lastname
+                                            , u.address
+                                            , u.phonenumber
+                                            , u.email
+                                        from `orders` mo
+                                        join `users` u
+                                        on mo.user_id = u.id
+                                        where mo.status = '$orderString'";
+        $order_user = mysqli_query($con, $ordered_user);
+        }elseif(isset($_POST['pending'])){
+            $orderString = "Pending";
+            $ordered_user = "SELECT DISTINCT mo.item_id
+                                            , mo.reference_id
+                                            , u.firstname
+                                            , u.lastname
+                                            , u.address
+                                            , u.phonenumber
+                                            , u.email
+                                        from `orders` mo
+                                        join `users` u
+                                        on mo.user_id = u.id
+                                        where mo.status = '$orderString'";
+        $order_user = mysqli_query($con, $ordered_user);
+        }
+        ?>
         <!-- MANAGE ORDERS CONTENT -->
         <div class="container m-5">
             <div class="row mb-3">
