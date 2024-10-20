@@ -45,8 +45,8 @@ include '../functions.php';
 
   <form>
    <select name="sortBy">
-    <option value="Pending">Pending</option>
-    <option value="Delivered">Delivered</option>
+    <option value="status">Pending</option>
+    <option value="status">Delivered</option>
    </select>
    <button type="submit" formaction="?" formmethod="post">Submit</button>
   </form>

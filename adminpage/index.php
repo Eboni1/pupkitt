@@ -90,15 +90,17 @@ include "../functions.php";
                 background-color: #c9864f;
             }
             .box{
-                background-color: white;
+                background-color: #ffeee3;
                 box-shadow: brown;
-                border-radius: .5rem;
+                border-radius: 50px;
                 padding: 2rem;
                 border: solid;
                 overflow-x: hidden;
             }
             .image{
-                width: 200px;
+                width: 250px;
+                border-radius: 10%;
+                padding-bottom: 10px;
             }
         </style>
     </head>
@@ -154,7 +156,7 @@ include "../functions.php";
                             $count = $count_review->num_rows;
 
                             ?>
-                                <div class="col m-2 box" style="align-content: center">
+                                <div class="col m-2 box" style="text-align: center">
                                     <img src="../images/<?= $row['image']; ?>" alt="" class="image">
                                     <h3 class="title"><?= $row['item_name']; ?></h3>
                                     <p class="total-reviews"><i class="fas fa-star"></i> <span><?= $count; ?></span></p>

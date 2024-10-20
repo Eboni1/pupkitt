@@ -3,17 +3,19 @@ session_start();
 include "../connection.php";
 include "../functions.php";
 
-
-
- 
-
-
-
-
-
-
-
-
+$ordered_user = "SELECT DISTINCT mo.item_id
+                                , mo.reference_id
+                                , mo.status
+                                , u.firstname
+                                , u.lastname
+                                , u.address
+                                , u.phonenumber
+                                , u.email
+                            from `orders` mo
+                            join `users` u
+                            on mo.user_id = u.id
+                            where mo.status = 'Delivered'";
+$order_user = mysqli_query($con, $ordered_user);
 ?>
 
 <!DOCTYPE html>
@@ -120,8 +122,7 @@ include "../functions.php";
                 <div class="row">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                        <a type="submit" class="nav-link sort_ref" name="delivered" role="button" aria-expanded="false">Delivered</a>
-                        <a type="submit" class="nav-link sort_ref" name="pending" role="button" aria-expanded="false">Pending</a>
+                        <a type="submit" class="nav-link sort_ref" href="#" role="button" aria-expanded="false">Sort by</a>
                         <input type="text" placeholder="Search" style="float:right">
                         </li>
                     </ul>
@@ -129,43 +130,15 @@ include "../functions.php";
             </form>
             
         </div>
-        <?php
-           if(isset($_POST['delivered'])){
-            $orderString = "Delivered";
-            $ordered_user = "SELECT DISTINCT mo.item_id
-                                            , mo.reference_id
-                                            , u.firstname
-                                            , u.lastname
-                                            , u.address
-                                            , u.phonenumber
-                                            , u.email
-                                        from `orders` mo
-                                        join `users` u
-                                        on mo.user_id = u.id
-                                        where mo.status = '$orderString'";
-        $order_user = mysqli_query($con, $ordered_user);
-        }elseif(isset($_POST['pending'])){
-            $orderString = "Pending";
-            $ordered_user = "SELECT DISTINCT mo.item_id
-                                            , mo.reference_id
-                                            , u.firstname
-                                            , u.lastname
-                                            , u.address
-                                            , u.phonenumber
-                                            , u.email
-                                        from `orders` mo
-                                        join `users` u
-                                        on mo.user_id = u.id
-                                        where mo.status = '$orderString'";
-        $order_user = mysqli_query($con, $ordered_user);
-        }
-        ?>
         <!-- MANAGE ORDERS CONTENT -->
         <div class="container m-5">
             <div class="row mb-3">
-                <div class="col-4"></div>
-                <div class="col-4"></div>
-                <div class="col-4"></div>
+                <div class="col-2"><h6>Order ID</h6></div>
+                <div class="col-2"><h6>Customer Name</h6></div>
+                <div class="col-2"><h6>Address</h6></div>
+                <div class="col-2"><h6>Contact info</h6></div>
+                <div class="col-2"><h6>Ordered Items</h6></div>
+                <div class="col-2"><h6>Status</h6></div>
             </div>
             
             <?php
@@ -177,35 +150,36 @@ include "../functions.php";
                     $address = $order_info['address'];
                     $phonenumber = $order_info['phonenumber'];
                     $email = $order_info['email'];
+                    $status = $order_info['status'];
             ?>
             <div class="row mb-3">
                 <!-- COLUMN -->
-                <div class="col">
+                <div class="col-2">
                     <?php
                         echo "<small>".$reference_id."</small> " ;
                     ?>
                 </div>
                 <!-- COLUMN -->
-                <div class="col"> 
+                <div class="col-2"> 
                     <?php
-                        echo "<em>".$item_ref."</em> - <a>".$firstname."</a> " . $lastname . "<br>" ;  
+                        echo "<em>".$item_ref."</em> - <a>".$firstname."</a> " . $lastname;  
                     ?>
                 </div>
                 <!-- COLUMN -->
-                <div class="col">
+                <div class="col-2">
                     <?php
                         echo "<small>".$address."</small> " ;
                     ?>
                 </div>
                 <!-- COLUMN -->
-                <div class="col">
+                <div class="col-2">
                     <?php
                         echo "<small>".$phonenumber."</small> <br>" ;
                         echo "<small>".$email."</small>" ;
                     ?>
                 </div>
                 <!-- COLUMN -->
-                <div class="col">
+                <div class="col-2">
                     <?php
                         $sql_get_ingredient = "SELECT i.item_name 
                                                     , i.item_price 
@@ -221,9 +195,14 @@ include "../functions.php";
                             echo "<li>" . $ing['item_name'] . "(". $ing['item_price'] .")" . "</li>";
                         }
                         echo "</ul>";  ?>
-                        <a href="update_order.php?update_order_status=D&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-success btn-sm">Delivered</a>
-                        <a href="update_order.php?update_order_status=X&ref_id=<?php echo $ord_ref_num;?>" class="btn btn-danger btn-sm">Cancel</a> <hr>
                         
+                        
+                </div>
+                <!-- COLUMN -->
+                <div class="col-2">
+                    <?php
+                        echo "<small>".$status."</small> <br>" ;
+                    ?>
                 </div>
                 <?php } ?>
             </div>
