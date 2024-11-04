@@ -26,11 +26,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     ##Create queries for inserting into database
 
     if(!empty($password) && !empty($firstname) && !empty($phonenum) && !empty($barangay)){
-        $query = "INSERT INTO users
+        $query = "INSERT INTO `users`
                   (`username`, `firstname`, `middlename`, `lastname`, `fullname` `email`, `phonenumber`, `password`, `address`, `birth_date`, `gender`, `user_type`)
                   VALUES
-                  ('$username', '$firstname', '$middlename', '$lastname', '$fullname', '$email', '$phonenum', '$password', '$address', '$birthdate', '$gender', 'U'";
+                  ('$username', '$firstname', '$middlename', '$lastname', '$fullname', '$email', '$phonenum', '$password', '$address', '$birthdate', '$gender', 'U')";
         $result = mysqli_query($con, $query);
+        if($result){
+            echo '<script>alert("Account created Successfully")</script>';
+            header('Location: index.php');
+        }
     }else{
         echo '<script>alert("Please fill out the form with the appropriate information")</script>';
     }
