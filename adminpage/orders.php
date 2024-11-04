@@ -3,6 +3,8 @@ session_start();
 include "../connection.php";
 include "../functions.php";
 
+$user_info = check_login($con);
+
 $ordered_user = "SELECT DISTINCT mo.item_id
                                 , mo.reference_id
                                 , mo.status

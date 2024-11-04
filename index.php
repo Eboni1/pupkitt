@@ -30,6 +30,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                     die;
                 }
                 break;
+            case 'S':
+                if($logindata['password'] === $password){
+                    $_SESSION['num_id'] = $logindata['id'];
+                    $_SESSION['type'] = $type;
+                    header("Location: shopowners/index.php");
+                    die;
+                }
+            case 'C':
+                if($logindata['password'] === $password){
+                    $_SESSION['num_id'] = $logindata['id'];
+                    $_SESSION['type'] = $type;
+                    header("Location: couriers/index.php");
+                    die;
+                }
             default:
             echo '<script>alert("Undefined user type.")</script>';
         }
