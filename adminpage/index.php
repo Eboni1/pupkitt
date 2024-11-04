@@ -3,6 +3,7 @@ session_start();
 include "../connection.php";
 include "../functions.php";
 
+$user_info = check_login($con);
 
 ?>
 
@@ -106,6 +107,7 @@ include "../functions.php";
     </head>
     <body>
         <div class="container">
+            <div class="row"><?php echo $user_info['username']; ?></div>
             <div class="row mt-3">
                 <nav class="nav">
                     <img src="../images/logoparent.png" class="logo">

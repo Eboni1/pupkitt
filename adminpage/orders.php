@@ -14,7 +14,7 @@ $ordered_user = "SELECT DISTINCT mo.item_id
                             from `orders` mo
                             join `users` u
                             on mo.user_id = u.id
-                            where mo.status = 'Delivered'";
+                            where mo.status = 'Pending'";
 $order_user = mysqli_query($con, $ordered_user);
 ?>
 
@@ -99,7 +99,20 @@ $order_user = mysqli_query($con, $ordered_user);
                 padding-left: 10px;
                 border-radius: 20px;
                 font-weight: 700;
-                background-color: #c9864f;
+                background-color: rgba(213, 136, 96, 1);
+            }
+            .check{
+                border-radius: 10px;
+            }
+            .check::after{
+                border-radius: 10px;
+                border: 2px #4d4b34 solid;
+                color:black;
+            }
+            .navbutton{
+                background-color: rgba(160, 255, 157, 1);
+                margin-left: 10px;
+                border-radius: 20px;
             }
         </style>
     </head>
@@ -118,15 +131,28 @@ $order_user = mysqli_query($con, $ordered_user);
                 </nav>
             </div>
             <hr style="height: 2px">
-            <form action="" method="post">
-                <div class="row">
+            <form action="phpsearch.php" method="post">
+                <input type="radio" class="btn-check" name="options" value="1" id="btn-check-4" autocomplete="off">
+                <label class="btn btn-success check" for="btn-check-4">Delivered</label>
+
+                <input type="radio" class="btn-check" name="options" value="2" id="btn-check-5" autocomplete="off">
+                <label class="btn btn-success check" for="btn-check-5">Pending</label>
+
+                <input class="navbutton" type="submit" style="float:right">
+
+                <input type="text" placeholder="Search" name="search" style="float:right">
+                
+                <!-- <div class="row">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                         <a type="submit" class="nav-link sort_ref" href="#" role="button" aria-expanded="false">Sort by</a>
+
+
                         <input type="text" placeholder="Search" style="float:right">
+                        <button></button>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </form>
             
         </div>

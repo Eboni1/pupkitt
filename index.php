@@ -57,9 +57,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         </style>
     </head>
     <body>
-        <div class="container mt-5">
+        <div class="container mt-5 mb-3">
             <form action="" method="post">
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4 text-center">
                     <label for="">Username</label>
@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 </div>
                 <div class="col-sm-4"></div> 
             </div>
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4 text-center">
                     <label for="">Password</label>

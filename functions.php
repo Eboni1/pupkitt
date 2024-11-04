@@ -3,10 +3,10 @@
 function check_login($con)
 {
 
-	if(isset($_SESSION['id']))
+	if(isset($_SESSION['num_id']))
 	{
 
-		$id = $_SESSION['id'];
+		$id = $_SESSION['num_id'];
 
 		
 				$query = "select * from users where id = '$id' limit 1";
@@ -34,4 +34,8 @@ function generateRandom8DigitNumber() {
     // Generate a random number between 10000000 and 99999999
     $randomNumber = rand(10000000, 99999999);
     return $randomNumber;
+}
+
+function query_check(){
+	
 }

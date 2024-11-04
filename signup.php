@@ -18,6 +18,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $password = $_POST['password'];
     $email = $_POST['email']; 
 
+    $fullname = $firstname . " " . $middlename . " " . $lastname;
+
     $address = $barangay . ", " . $city . ", " . $province . ", " . $zipcode;
 
 
@@ -25,9 +27,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     if(!empty($password) && !empty($firstname) && !empty($phonenum) && !empty($barangay)){
         $query = "INSERT INTO users
-                  (`username`, `firstname`, `middlename`, `lastname`, `email`, `phonenumber`, `password`, `address`, `birth_date`, `gender`, `user_type`)
+                  (`username`, `firstname`, `middlename`, `lastname`, `fullname` `email`, `phonenumber`, `password`, `address`, `birth_date`, `gender`, `user_type`)
                   VALUES
-                  ('$username', '$firstname', '$middlename', '$lastname', '$email', '$phonenum', '$password', '$address', '$birthdate', '$gender', 'U'";
+                  ('$username', '$firstname', '$middlename', '$lastname', '$fullname', '$email', '$phonenum', '$password', '$address', '$birthdate', '$gender', 'U'";
         $result = mysqli_query($con, $query);
     }else{
         echo '<script>alert("Please fill out the form with the appropriate information")</script>';
@@ -46,6 +48,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+    </style>
 </head>
 <body>
     <form action="" method="post">
