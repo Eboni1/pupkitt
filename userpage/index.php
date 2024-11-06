@@ -6,7 +6,7 @@
         <title>Home</title>
         <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-        <script src="app.js"></script>
+        
         <link rel="stylesheet" href="style.css">
         <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -71,4 +71,5 @@
             </div>
         </div>
     </body>
+    <script src="app.js"></script>
 </html>
