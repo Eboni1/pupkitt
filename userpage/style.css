@@ -1,0 +1,214 @@
+body{
+    background-color: #ffe8b7;
+    font-family: 'Poppins';font-size: 22px;
+}
+.logo{
+    width: 70px;
+}
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.nav ul li{
+    display: inline-block;
+    list-style: none;
+    list-style-position: inside;
+    margin: 10px 20px;
+}
+
+.nav ul li a{
+    color: #4d4b34;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+}
+.nav ul li a::after{
+    content: '';
+    width: 0;
+    height: 1px;
+    background: #b94013;
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    transition: 0.2s;
+}
+.nav ul li a:hover::after{
+    width: 100%;
+}
+.profilepic{
+    width: 50px;
+    border-radius: 50%;
+}
+.categ{
+    border: 2px solid #b94013;
+    border-radius: 20%;
+}
+.categ a{
+    text-decoration: none;
+    color: #4d4b34;
+}
+.dropdown-toggle{
+    border: 2px solid brown;
+    display: inline;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    background-color: #c9864f;
+}
+input[type=text]{
+    border: 2px solid brown;
+    display: inline;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    background-color: #c9864f;
+}
+.box{
+    background-color: #ffeee3;
+    box-shadow: brown;
+    border-radius: 50px;
+    padding: 2rem;
+    border: solid;
+    overflow-x: hidden;
+}
+.image{
+    width: 250px;
+    border-radius: 10%;
+    padding-bottom: 10px;
+}
+.container{
+    width: 900px;
+    max-width: 90vw;
+    margin: auto;
+    padding-top: 10px;
+    transition: transform .5s;
+}
+svg{
+    width: 30px;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+header .icon-cart{
+    position: relative;
+}
+header .icon-cart span{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: -20px;
+}
+.Listproduct .item img{
+    width: 90%;
+    filter: drop-shadow(0 20px 20px #0009);
+}
+.Listproduct{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.Listproduct .item{
+    background-color: #eeeee6;
+    padding: 20px;
+    border-radius: 20px;
+    justify-content: center;
+}
+.Listproduct .item h2{
+    font-weight: 500;
+    font-size: large;
+}
+.Listproduct .item .price{
+    letter-spacing: 7px;
+    font-size: small;
+}
+.Listproduct .item button{
+    background-color: #353432;
+    color: #eee;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+.cartTab{
+    width: 400px;
+    background-color: #353432;
+    color: #eee;
+    position: fixed;
+    inset: 0 -400px 0 auto;
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+    transition: .5s;
+}
+body.showCart .cartTab{
+    inset: 0 0 0 auto;
+}
+body.showCart .container{
+    transform: translateX(-250px);
+}
+.cartTab h1{
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+}
+.cartTab .btn{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.cartTab .btn button{
+    background-color: #E8BC8E;
+    border: none;
+    font-family: Poppins;
+    font-weight: 500;
+    cursor: pointer;
+}
+.cartTab .btn .close{
+    background-color: #eee;
+}
+.cartTab .ListCart .item img{
+    width: 100%;
+}
+.cartTab .ListCart .item{
+    display: grid;
+    grid-template-columns: 70px 150px 50px 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+.ListCart .quantity span{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #eee;
+    color: #555;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.ListCart .quantity span:nth-child(2){
+    background-color: transparent;
+    color: #eee;
+}
+.ListCart .item:nth-child(even){
+    background-color: #eee1;
+}
+.ListCart{
+    overflow: auto;
+}
+.ListCart::-webkit-scrollbar{
+    width: 0px;
+}
