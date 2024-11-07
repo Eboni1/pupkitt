@@ -1,3 +1,5 @@
+<!-- PHP is still needed to be implemented in order to connect this page to the database -->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +17,7 @@
     </head>
     <body class="">
         <div class="container">
+            <!-- This is where the header and the navigation bar begins --> 
             <div class="row" style="margin-top: 10px;">
                 <nav class="nav">
                     <img src="../images/logoparent.png" class="logo">
@@ -22,7 +25,7 @@
                         <li><a href="#">DASHBOARD</a></li>
                         <li><a href="orders.php">ORDERS</a></li>
                         <li><a href="#services">PRODUCTS</a></li>
-                        <a href="#"><img class="profilepic" src="../images/profileimg.jpg" alt="profileimg"></a>
+                        <a href="#"><img class="profilepic" src="../images/profileimg.jpg" alt="profileimg"></a> <!-- This button opens up the profile of the user --> 
                     </ul>
                 </nav>
             </div>
@@ -33,9 +36,10 @@
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
                     </svg>
-                    <span>0</span>
+                    <span>0</span> <!-- Notification number indicating the number of items in the shopping cart -->
                 </div>
             </header>
+            <!-- Listing of the products for the user page -->
             <div class="Listproduct">
                 <div class="item">
                     <img src="../images/Topbreed.png" alt="test">
@@ -44,30 +48,63 @@
                     <button class="addCart">Add to Cart</button>
                 </div>
             </div>
-            <div class="cartTab">
-                <h1>Shopping Cart</h1>
-                <div class="ListCart">
-                    <div class="item">
-                        <div class="image">
-                            <img src="../images/Pedigree2.jpg" alt="test">
-                        </div>
-                        <div class="name">
-                            NAME
-                        </div>
-                        <div class="totalprice">
-                            Php 300.00
-                        </div>
-                        <div class="quantity">
-                            <span class="minus"><</span>
-                            <span>1</span>
-                            <span class="plus">></span>
-                        </div>
+        </div>
+        <!-- Cart Tab where the items in the shopping cart are displayed and modified by the user -->
+        <div class="cartTab">
+            <h1>Shopping Cart</h1>
+            <div class="ListCart">
+                <div class="item">
+                    <div class="image">
+                        <img src="../images/Topbreed.png" alt="test">
+                    </div>
+                    <div class="name">
+                        NAME
+                    </div>
+                    <div class="totalprice">
+                        Php 300.00
+                    </div>
+                    <div class="quantity">
+                        <span class="minus"><</span>
+                        <span>1</span>
+                        <span class="plus">></span>
                     </div>
                 </div>
-                <div class="btn">
-                    <button class="close">CLOSE</button>
-                    <button class="checkOut">CHECK Out</button>
+                <div class="item">
+                    <div class="image">
+                        <img src="../images/Topbreed.png" alt="test">
+                    </div>
+                    <div class="name">
+                        NAME
+                    </div>
+                    <div class="totalprice">
+                        Php 300.00
+                    </div>
+                    <div class="quantity">
+                        <span class="minus"><</span>
+                        <span>1</span>
+                        <span class="plus">></span>
+                    </div>
                 </div>
+                <div class="item">
+                    <div class="image">
+                        <img src="../images/Topbreed.png" alt="test">
+                    </div>
+                    <div class="name">
+                        NAME
+                    </div>
+                    <div class="totalprice">
+                        Php 300.00
+                    </div>
+                    <div class="quantity">
+                        <span class="minus"><</span>
+                        <span>1</span>
+                        <span class="plus">></span>
+                    </div>
+                </div>
+            </div>
+            <div class="btn">
+                <button class="close">CLOSE</button> <!-- This button closes the cart tab -->
+                <button class="checkOut">CHECK Out</button> <!-- This button takes the user to the checkout page -->
             </div>
         </div>
     </body>
