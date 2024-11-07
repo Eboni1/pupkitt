@@ -56,10 +56,10 @@ $items = mysqli_query($con, $query);
                         while($row = $items -> fetch_assoc()){
                             $item_id = $row['item_id'];
                             ?>
-                            <div class="item">
+                            <div class="item" id="<?php echo $item_id ?>">
                                 <img src="../images/<?php echo $row['image']; ?>" alt="item image">
                                 <h2><?php echo $row['item_name'] ?></h2>
-                                <div class="price"><?php echo $row['item_price'] ?></div>
+                                <div class="price">Php <?php echo $row['item_price'] ?></div>
                                 <button class="addCart">Add to Cart</button>
                             </div><?php
                         }
