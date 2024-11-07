@@ -1,4 +1,14 @@
 <!-- PHP is still needed to be implemented in order to connect this page to the database -->
+<?php
+session_start();
+include "../connection.php";
+include "../functions.php";
+
+$user_info = check_login($con);
+
+$query = "SELECT * FROM `items`";
+$items = mysqli_query($con, $query);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -41,12 +51,20 @@
             </header>
             <!-- Listing of the products for the user page -->
             <div class="Listproduct">
-                <div class="item">
-                    <img src="../images/Topbreed.png" alt="test">
-                    <h2>PRODUCT NAME</h2>
-                    <div class="price">Php 300.00</div>
-                    <button class="addCart">Add to Cart</button>
-                </div>
+                <?php
+                    if($items -> num_rows > 0){
+                        while($row = $items -> fetch_assoc()){
+                            $item_id = $row['item_id'];
+                            ?>
+                            <div class="item">
+                                <img src="../images/<?php echo $row['image']; ?>" alt="item image">
+                                <h2><?php echo $row['item_name'] ?></h2>
+                                <div class="price"><?php echo $row['item_price'] ?></div>
+                                <button class="addCart">Add to Cart</button>
+                            </div><?php
+                        }
+                    }
+                ?>
             </div>
         </div>
         <!-- Cart Tab where the items in the shopping cart are displayed and modified by the user -->
