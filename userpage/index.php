@@ -8,6 +8,9 @@ $user_info = check_login($con);
 
 $query = "SELECT * FROM `items`";
 $items = mysqli_query($con, $query);
+$rows = $items -> fetch_assoc();
+
+$puery = "SELECT * FROM `items` WHERE "
 ?>
 
 <!DOCTYPE html>
@@ -51,26 +54,63 @@ $items = mysqli_query($con, $query);
             </header>
             <!-- Listing of the products for the user page -->
             <div class="Listproduct">
+                <ul>
                 <?php
                     if($items -> num_rows > 0){
-                        while($row = $items -> fetch_assoc()){
-                            $item_id = $row['item_id'];
+                        foreach($rows as $row){
                             ?>
-                            <div class="item" id="<?php echo $item_id ?>">
-                                <img src="../images/<?php echo $row['image']; ?>" alt="item image">
-                                <h2><?php echo $row['item_name'] ?></h2>
-                                <div class="price">Php <?php echo $row['item_price'] ?></div>
-                                <button class="addCart">Add to Cart</button>
-                            </div><?php
+                            <li>
+                                <div class="item" id="<?php echo $row['item_id'] ?>">
+                                    <img src="../images/<?php echo $row['image']; ?>" alt="item image">
+                                    <h2><?php echo $row['item_name'] ?></h2>
+                                    <div class="price">Php <?php echo $row['item_price'] ?></div>
+                                    <form action="addtoCart.php" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $row['item_id'] ?>">
+                                        <input type="submit" value="Add to Cart">
+                                    </form>
+                                        
+                                </div>
+                            </li>
+                            <?php
                         }
                     }
                 ?>
+                </ul>
             </div>
         </div>
         <!-- Cart Tab where the items in the shopping cart are displayed and modified by the user -->
         <div class="cartTab">
             <h1>Shopping Cart</h1>
             <div class="ListCart">
+                <?php
+                if(empty($_SESSION['cart'])){
+                    ?> <h2>Your cart is empty.</h2><?php
+                }else{
+                    foreach($_SESSION['cart'] as $id => $quantity){
+                        ?>
+                        <div class="item">
+                            <div class="image">
+                                <img src="../images/Topbreed.png" alt="test">
+                            </div>
+                            <div class="name">
+                                NAME
+                            </div>
+                            <div class="totalprice">
+                                Php 300.00
+                            </div>
+                            <div class="quantity">
+                                <span class="minus"><</span>
+                                <span>1</span>
+                                <span class="plus">></span>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+
+                ?>
+
+
                 <div class="item">
                     <div class="image">
                         <img src="../images/Topbreed.png" alt="test">

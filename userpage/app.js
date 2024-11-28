@@ -10,6 +10,8 @@ closeCart.addEventListener('click', close = () => {
     body.classList.toggle('showCart')
 })
 
+
+
 item.addEventListener('click', (event) => {
     let positionClick = event.target;
     if (positionClick.classList.contains('addCart')){
