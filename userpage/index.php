@@ -29,6 +29,7 @@ $puery = "SELECT * FROM `items` WHERE "
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
     </head>
     <body class="">
+        <h4><?php echo $user_info['username'] ?></h4>
         <div class="container">
             <!-- This is where the header and the navigation bar begins --> 
             <div class="row" style="margin-top: 10px;">
@@ -60,8 +61,8 @@ $puery = "SELECT * FROM `items` WHERE "
                         foreach($rows as $row){
                             ?>
                             <li>
-                                <div class="item" id="<?php echo $row['item_id'] ?>">
-                                    <img src="../images/<?php echo $row['image']; ?>" alt="item image">
+                                <div class="item">
+                                    <img src="../images/<?php echo $row['item_image']; ?>" alt="item image">
                                     <h2><?php echo $row['item_name'] ?></h2>
                                     <div class="price">Php <?php echo $row['item_price'] ?></div>
                                     <form action="addtoCart.php" method="post">
@@ -79,6 +80,16 @@ $puery = "SELECT * FROM `items` WHERE "
             </div>
         </div>
         <!-- Cart Tab where the items in the shopping cart are displayed and modified by the user -->
+        <?php
+        if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
+            $cartItems = array_keys($_SESSION['cart']);
+
+            $ids = implode(',', array_map('intval', $cartItems));
+
+            $suery = "SELECT item_id, item_name, item_price, item_image FROM `items` WHERE item_id IN ($ids)";
+            $results = mysqli_query($con, $suery);
+        }
+        ?>
         <div class="cartTab">
             <h1>Shopping Cart</h1>
             <div class="ListCart">
@@ -86,21 +97,27 @@ $puery = "SELECT * FROM `items` WHERE "
                 if(empty($_SESSION['cart'])){
                     ?> <h2>Your cart is empty.</h2><?php
                 }else{
-                    foreach($_SESSION['cart'] as $id => $quantity){
+                    while($rowe = mysqli_fetch_assoc($results)){
+                        $id = $rowe['item_id'];
+                        $name = $rowe['item_name'];
+                        $price = $rowe['item_price'];
+                        $image = $rowe['item_image'];
+                        $quantity = $_SESSION['cart']['$id'];
+                        $totalPrice = $price * $quantity;
                         ?>
                         <div class="item">
                             <div class="image">
-                                <img src="../images/Topbreed.png" alt="test">
+                                <img src="../images/<?php echo $image ?>" alt="<?php echo $image ?>">
                             </div>
                             <div class="name">
-                                NAME
+                                <?php $name ?>
                             </div>
                             <div class="totalprice">
-                                Php 300.00
+                                <?php $price ?>
                             </div>
                             <div class="quantity">
                                 <span class="minus"><</span>
-                                <span>1</span>
+                                <span><?php $quantity ?></span>
                                 <span class="plus">></span>
                             </div>
                         </div>
@@ -111,54 +128,7 @@ $puery = "SELECT * FROM `items` WHERE "
                 ?>
 
 
-                <div class="item">
-                    <div class="image">
-                        <img src="../images/Topbreed.png" alt="test">
-                    </div>
-                    <div class="name">
-                        NAME
-                    </div>
-                    <div class="totalprice">
-                        Php 300.00
-                    </div>
-                    <div class="quantity">
-                        <span class="minus"><</span>
-                        <span>1</span>
-                        <span class="plus">></span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="image">
-                        <img src="../images/Topbreed.png" alt="test">
-                    </div>
-                    <div class="name">
-                        NAME
-                    </div>
-                    <div class="totalprice">
-                        Php 300.00
-                    </div>
-                    <div class="quantity">
-                        <span class="minus"><</span>
-                        <span>1</span>
-                        <span class="plus">></span>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="image">
-                        <img src="../images/Topbreed.png" alt="test">
-                    </div>
-                    <div class="name">
-                        NAME
-                    </div>
-                    <div class="totalprice">
-                        Php 300.00
-                    </div>
-                    <div class="quantity">
-                        <span class="minus"><</span>
-                        <span>1</span>
-                        <span class="plus">></span>
-                    </div>
-                </div>
+                
             </div>
             <div class="btn">
                 <button class="close">CLOSE</button> <!-- This button closes the cart tab -->

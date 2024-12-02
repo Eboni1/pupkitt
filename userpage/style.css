@@ -133,7 +133,7 @@ header .icon-cart span{
     color: #eee;
     position: fixed;
     top: 0;
-    right: -400px;
+    right: 0;
     bottom: 0;
     left: auto;
     display: grid;

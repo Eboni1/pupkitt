@@ -5,9 +5,7 @@ include "../functions.php";
 
 
 
-if(!isset($_SESSION['cart'])){
-    $_SESSION['cart'] = [];
-}
+if(!isset($_SESSION['cart'])){ $_SESSION['cart'] = [];}
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])){
     $id = $_POST['id'];
